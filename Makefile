@@ -2,8 +2,8 @@
 
 PACKAGE = aioamqp
 
-NOSETESTS ?= nosetests
-TEST_OPTIONS ?= --verbosity=2
+TEST_LAUNCHER ?= pytest
+TEST_OPTIONS ?= -v -s --timeout=20
 PYLINT_RC ?= .pylintrc
 
 BUILD_DIR ?= build
@@ -28,11 +28,14 @@ livehtml: docs
 	sphinx-autobuild $(AUTOSPHINXOPTS) $(ALLSPHINXOPTS) $(SPHINXBUILDDIR)
 
 test:
-	$(NOSETESTS) $(PACKAGE) $(TEST_OPTIONS)
+	$(TEST_LAUNCHER) $(TEST_OPTIONS) $(PACKAGE)
 
 
 update:
 	pip install -r requirements_dev.txt
+
+pylint:
+	pylint aioamqp
 
 
 ### semi-private targets used by polyconseil's CI (copy-pasted from blease) ###
@@ -43,9 +46,9 @@ reports:
 	mkdir -p reports
 
 jenkins-test: reports
-	$(MAKE) test TEST_OPTIONS="--with-coverage --cover-package=$(PACKAGE) \
-		--cover-xml --cover-xml-file=reports/xmlcov.xml \
-		--with-xunit --xunit-file=reports/TEST-$(PACKAGE).xml \
+	$(MAKE) test TEST_OPTIONS="--cov=$(PACKAGE) \
+		--cov-report xml:reports/xmlcov.xml \
+		--junitxml=reports/TEST-$(PACKAGE).xml \
 		-v \
 		$(TEST_OPTIONS)"
 

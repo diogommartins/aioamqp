@@ -4,6 +4,16 @@ Changelog
 Next release
 ------------
 
+ * Uses pamqp to encode or decode protocol frames.
+ * Drops support of python 3.3 and python 3.4.
+ * Uses async and await keywords.
+
+Aioamqp 0.12.0
+--------------
+
+ * Fix an issue to use correct int encoder depending on int size (closes #180).
+ * Call user-specified callback when a consumer is cancelled.
+
 Aioamqp 0.11.0
 --------------
 

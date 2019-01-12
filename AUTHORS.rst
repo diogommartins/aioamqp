@@ -19,4 +19,6 @@ AUTHORS are (and/or have been)::
     * Alexander Gromyko
     * Nick Humrich
     * Pavel Kamaev
-
+    * Mads Sejersen
+    * Dave Shawley
+    * Jacob Hagstedt P Suorra

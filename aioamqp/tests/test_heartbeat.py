@@ -3,19 +3,17 @@
 """
 
 import asyncio
-import unittest
+import asynctest
 from unittest import mock
 
 from aioamqp.protocol import CLOSED
 
 from . import testcase
-from . import testing
 
 
-class HeartbeatTestCase(testcase.RabbitTestCase, unittest.TestCase):
+class HeartbeatTestCase(testcase.RabbitTestCaseMixin, asynctest.TestCase):
 
-    @testing.coroutine
-    def test_heartbeat(self):
+    async def test_heartbeat(self):
         with mock.patch.object(
                 self.amqp, 'send_heartbeat', wraps=self.amqp.send_heartbeat
                 ) as send_heartbeat:
@@ -25,8 +23,8 @@ class HeartbeatTestCase(testcase.RabbitTestCase, unittest.TestCase):
             self.amqp._heartbeat_timer_send_reset()
             self.amqp._heartbeat_timer_recv_reset()
 
-            yield from asyncio.sleep(1.001)
+            await asyncio.sleep(1.001)
             send_heartbeat.assert_called_once_with()
 
-            yield from asyncio.sleep(1.001)
+            await asyncio.sleep(1.001)
             self.assertEqual(self.amqp.state, CLOSED)

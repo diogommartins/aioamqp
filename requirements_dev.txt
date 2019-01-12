@@ -1,6 +1,10 @@
 -e .
-
-nose
+asynctest
 coverage
 pylint
--e git+https://github.com/bkjones/pyrabbit.git#egg=pyrabbit
+pytest>4
+pytest-timeout
+Sphinx
+sphinx-rtd-theme
+
+pyrabbit2

@@ -23,9 +23,9 @@ setuptools.setup(
     packages=[
         'aioamqp',
     ],
-    extras_require={
-        ':python_version=="3.3"': ['asyncio'],
-    },
+    install_requires=[
+        'pamqp>=2.0,<3',
+    ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
@@ -33,10 +33,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
     platforms='all',
     license='BSD'
